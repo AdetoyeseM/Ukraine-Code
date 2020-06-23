@@ -1,0 +1,10 @@
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+
+*.jks
+*.keystore
+android/app/google-services.json

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "696534992086",
+    "firebase_url": "https://witty-app-6dbc3.firebaseio.com",
+    "project_id": "witty-app-6dbc3",
+    "storage_bucket": "witty-app-6dbc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696534992086:android:a3fc98ed8510131a28f577",
+        "android_client_info": {
+          "package_name": "com.pictango.flutter_app1234"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696534992086-8930g5kq8opsreo1cjv88rib47i9oki9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9MBF_fiwFrJHVm6ZshHGqDBebJH3N-fU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696534992086-8930g5kq8opsreo1cjv88rib47i9oki9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
