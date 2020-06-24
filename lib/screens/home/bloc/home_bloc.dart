@@ -16,6 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserModel currentUser;
   final List<PostModel> items = [];
   final List<UserModel> users = [];
+  final List<String> subscriptionUserIds = [];
 
   HomeBloc(this.postReposetory, this.userReposetory, this.currentUser);
 
@@ -35,6 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> _refresh() async* {
     items.clear();
     users.clear();
+    subscriptionUserIds.clear();
     yield HomeLoading();
     yield* _load();
   }
@@ -42,7 +44,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> _load() async* {
     if (!(state is HomeData)) yield HomeLoading();
     try {
-      final result = await postReposetory.getOlderPosts(30,
+      if (subscriptionUserIds.length == 0) {
+        final data = await userReposetory.getSubscription(currentUser.id);
+        subscriptionUserIds.addAll(data.map<String>((e) => e.userId).toList());
+        subscriptionUserIds.add(currentUser.id);
+      }
+      final result = await postReposetory.getPosts(30,
+          subscriptionUserIds: subscriptionUserIds,
           lastDocumentId: items.length > 0 ? items.last.id : null);
       if (result.length > 0) {
         final userIds = result.map((e) => e.userId).toList();

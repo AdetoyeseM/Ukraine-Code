@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app1234/data/models/post.dart';
 
 abstract class PostReposetory {
-  Future<List<PostModel>> getOlderPosts(int limit,
-      {String lastDocumentId, String userId, bool showInvisiblePosts});
+  Future<List<PostModel>> getPosts(int limit,
+      {String lastDocumentId,
+      List<String> subscriptionUserIds,
+      String userId,
+      bool showInvisiblePosts});
   Future<DocumentReference> addPost(PostModel post);
   Future<void> delete(PostModel post);
   Future<void> save(PostModel post);
@@ -11,9 +14,10 @@ abstract class PostReposetory {
 
 class FirebasePostReposetory extends PostReposetory {
   @override
-  Future<List<PostModel>> getOlderPosts(int limit,
+  Future<List<PostModel>> getPosts(int limit,
       {String lastDocumentId,
       String userId,
+      List<String> subscriptionUserIds,
       bool showInvisiblePosts = false}) async {
     var query = Firestore.instance
         .collection('post')
@@ -24,6 +28,9 @@ class FirebasePostReposetory extends PostReposetory {
     }
     if (userId != null) {
       query = query.where('userId', isEqualTo: userId);
+    }
+    if (subscriptionUserIds != null) {
+      query = query.where('userId', whereIn: subscriptionUserIds);
     }
     if (lastDocumentId != null) {
       final lastDocument = await Firestore.instance

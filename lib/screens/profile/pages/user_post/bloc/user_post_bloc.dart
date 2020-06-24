@@ -32,7 +32,7 @@ class UserPostBloc extends Bloc<UserPostEvent, UserPostState> {
   Stream<UserPostState> _load() async* {
     if (!(state is UserPostData)) yield UserPostLoading();
     try {
-      final result = await postReposetory.getOlderPosts(30,
+      final result = await postReposetory.getPosts(30,
           lastDocumentId: items.length > 0 ? items.last.id : null,
           userId: user.id,
           showInvisiblePosts: isCurrentUser);
