@@ -11,6 +11,7 @@ import 'package:flutter_app1234/screens/profile_edit/profile_edit_screen.dart';
 import 'package:flutter_app1234/screens/user_privacy_setting/privancy_and_settting_screen.dart';
 import 'package:flutter_app1234/users/bloc/users_bloc.dart';
 import 'package:flutter_app1234/users/users_screen.dart';
+import 'package:flutter_app1234/utilities/big_number_convertor.dart';
 import 'package:flutter_app1234/widgets/error_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -488,8 +489,13 @@ class _ProfuleWidgetState extends State<_ProfuleWidget>
                       userId: state.user.id,
                       title: 'Subscriptions',
                       userType: UserType.subscribers))),
-              child: Text("${state.user.subscriptions} subscriptions",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(
+                    "${bigNumberConvert(state.user.subscriptions)} subscriptions",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
             ),
           ),
         ),
@@ -503,8 +509,13 @@ class _ProfuleWidgetState extends State<_ProfuleWidget>
                         userId: state.user.id,
                         title: 'Followers',
                         userType: UserType.followers))),
-                child: Text("${state.user.followers} followers",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Text(
+                      "${bigNumberConvert(state.user.followers)} followers",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
               ),
               if (!state.isCurrentUser)
                 Container(
